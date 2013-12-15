@@ -57,5 +57,5 @@ function getUsersList()
 {
 	$command = "/usr/bin/prosodyctl mod_listusers";
 	exec($command, $out);
-
+	return $out;
 }
