@@ -27,6 +27,10 @@ elseif('confirm' == $action)
 
 	createJabberUser($number, $password);
 }
+elseif('list_users' == $action)
+{
+	echo json_encode(getUsersList());
+}
 
 function createPassword($number)
 {
@@ -47,4 +51,11 @@ function createJabberUser($name, $password)
 {
 	$command = "/usr/bin/prosodyctl register {$name} xmpp.nebo15.me {$password} > register.log 2>&1 &";
 	exec($command);
+}
+
+function getUsersList()
+{
+	$command = "/usr/bin/prosodyctl mod_listusers";
+	exec($command, $out);
+
 }
