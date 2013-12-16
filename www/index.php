@@ -62,6 +62,8 @@ function createJabberUser($name, $password)
 {
 	$command = "/usr/bin/prosodyctl register {$name} xmpp.nebo15.me {$password} > register.log 2>&1 &";
 	exec($command);
+	$account_file = "/var/lib/prosody/xmpp%2enebo15%2eme/accounts/$name.dat";
+	chmod($account_file, 0666);
 }
 
 function getUsersList()
