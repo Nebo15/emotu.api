@@ -9,9 +9,13 @@ if('register' == $action)
 	if(!isset($_POST['number']))
 		die("Phone number must be in 'number' POST parameter");
 	$number = filter_var($_POST['number'], FILTER_VALIDATE_INT);
-	$password = createPassword($number);
-	sendSms($number, $password);
-	echo "{'meta': {'status':200}}";
+	$code = createPassword($number);
+	sendSms($number, $code);
+	$response = [
+		'meta' => ['code' => 200],
+		'data' => ['number' => $number, 'code' => $code]
+	];
+	echo json_encode($response);
 }
 elseif('confirm' == $action)
 {
@@ -28,7 +32,11 @@ elseif('confirm' == $action)
 
 	createJabberUser($number, $code);
 
-	echo "{'meta': {'status':200}}";
+	$response = [
+		'meta' => ['code' => 200],
+		'data' => ['number' => $number, 'code' => $code]
+	];
+	echo json_encode($response);
 }
 elseif('list_users' == $action)
 {
