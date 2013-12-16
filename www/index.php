@@ -26,7 +26,7 @@ elseif('confirm' == $action)
 	if(createPassword($number) != $code)
 		die('Wrong code!');
 
-	createJabberUser($number, $password);
+	createJabberUser($number, $code);
 
 	echo "{'meta': {'status':200}}";
 }
