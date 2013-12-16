@@ -10,7 +10,8 @@ if('register' == $action)
 		die("Phone number must be in 'number' POST parameter");
 	$number = filter_var($_POST['number'], FILTER_VALIDATE_INT);
 	$password = createPassword($number);
-	var_dump(sendSms($number, $password));
+	sendSms($number, $password);
+	echo "{'meta': {'status':200}}";
 }
 elseif('confirm' == $action)
 {
@@ -26,6 +27,8 @@ elseif('confirm' == $action)
 		die('Wrong code!');
 
 	createJabberUser($number, $password);
+
+	echo "{'meta': {'status':200}}";
 }
 elseif('list_users' == $action)
 {
